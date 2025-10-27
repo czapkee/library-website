@@ -1,0 +1,95 @@
+<!-- catalog.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Catalog - BestLibrary</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/catalog.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header__container">
+            <div class="header__img-logo"><img class="header__img-logo" src="images/logo.png" alt="Logo"></div>
+            <div class="header__headline">BestLibrary</div>
+
+            <div class="header__burger-menu">
+                <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+                <label for="burger-checkbox" class="burger"></label>
+                <ul class="menu-list">
+                    <li><a href="/login" class="menu-item">Become an author!</a></li>
+                    <li><a href="/catalog" class="menu-item">Catalog</a></li>
+                    <li><a href="/" class="menu-item">main page</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Filters Section -->
+<!-- В catalog.html обновляем секцию фильтров -->
+<section class="filters-section">
+    <div class="filters-container">
+        <select class="filter-select" id="categoryFilter">
+            <option value="all">All Categories</option>
+            <!-- Categories loaded dynamically -->
+        </select>
+
+        <select class="filter-select" id="sortFilter">
+<!--            <option value="newest">Newest First</option>-->
+<!--            <option value="oldest">Oldest First</option>-->
+            <option value="title">Title A-Z</option>
+            <option value="title_desc">Title Z-A</option>
+            <option value="year">Year: New to Old</option>
+            <option value="year_old">Year: Old to New</option>
+            <option value="pages">Most Pages</option>
+            <option value="pages_asc">Fewest Pages</option>
+        </select>
+    </div>
+</section>
+
+
+        <section class="content-section">
+            <div id="content-container" class="books-grid">
+                <div class="loading">Loading books...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer__content-inner">
+            <div class="social-media__inner">
+                <div class="social-item">
+                    <div class="social-icon">
+                        <img src="./images/telega.png" alt="Telegram">
+                    </div>
+                    <a class="social-name" href="#">Telegram</a>
+                </div>
+                <div class="social-item">
+                    <div class="social-icon">
+                        <img src="./images/twitter.png" alt="Twitter">
+                    </div>
+                    <a class="social-name" href="#">Twitter</a>
+                </div>
+                <div class="social-item">
+                    <div class="social-icon">
+                        <img src="./images/insta.png" alt="Instagram">
+                    </div>
+                    <a class="social-name" href="#">Instagram</a>
+                </div>
+            </div>
+            <div class="header__headline">BestLibrary</div>
+            <div class="footer__author">Stavskaya Alina</div>
+        </div>
+    </footer>
+</div>
+
+<script src="/javascripts/catalog-loader.js"></script>
+</body>
+</html>

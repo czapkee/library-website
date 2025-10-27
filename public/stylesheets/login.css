@@ -1,0 +1,265 @@
+/* Reset и базовые стили */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    background-color: #FFEBEB;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+article > * + * {
+    margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+.header {
+    margin-top: 30px;
+}
+
+.header__inner {
+    width: 100%;
+    align-items: center;
+}
+
+.header__headline {
+    font-family: "Italianno", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 60px;
+    text-align: center;
+}
+
+.header__sub-line {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.registration-form {
+    background: #e8c8c8;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 500px;
+}
+
+.registration-form__title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.registration-form__group {
+    margin-bottom: 20px;
+}
+
+.registration-form__label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+
+.registration-form__input {
+    width: 100%;
+    padding: 12px 15px;
+    border: #FFFFFF;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #ffe9e9;
+}
+
+.registration-form__input:focus {
+    outline: none;
+    border-color: #984343;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.registration-form__role-label {
+    margin-bottom: 12px;
+}
+
+.registration-form__radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.registration-form__radio-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.registration-form__radio-input {
+    display: none;
+}
+
+.registration-form__radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.registration-form__radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #8a3f3f;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease;
+}
+
+.registration-form__radio-input:checked + .registration-form__radio-custom {
+    border-color: #491d1d;
+}
+
+.registration-form__radio-input:checked + .registration-form__radio-custom::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.registration-form__submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #8d6363;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.registration-form__submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(134, 23, 23, 0.4);
+}
+
+.registration-form__login-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+}
+
+.registration-form__login-link a {
+    color: #792020;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.registration-form__login-link a:hover {
+    text-decoration: underline;
+}
+
+.registration-form__radio-group--vertical {
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+@media (max-width: 480px) {
+    .registration-form {
+        padding: 30px 25px;
+    }
+
+    .registration-form__title {
+        font-size: 24px;
+    }
+
+    .registration-form__radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

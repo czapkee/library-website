@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body class="page">
+<div class="container">
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__headline">BestLibrary</div>
+            <div class="header__sub-line">Registration</div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="registration-form">
+            <h2 class="registration-form__title">Create account</h2>
+            <form class="register-form" id="registerForm">
+                <div class="registration-form__group">
+                    <input class="registration-form__input" type="text" id="username" name="username" required placeholder="Username">
+                </div>
+
+                <div class="registration-form__group">
+                    <input class="registration-form__input" type="email" id="email" name="email" required placeholder="E-mail">
+                </div>
+
+                <div class="registration-form__group">
+                    <input class="registration-form__input" type="password" id="password" name="password" required placeholder="Password">
+                </div>
+
+                <div class="registration-form__group">
+                    <div class="registration-form__radio-group">
+                        <label class="registration-form__radio-option">
+                            <input class="registration-form__radio-input" type="radio" name="role" value="author" required>
+                            <span class="registration-form__radio-custom"></span>
+                            I'm an author
+                        </label>
+                        <label class="registration-form__radio-option">
+                            <input class="registration-form__radio-input" type="radio" name="role" value="reader" checked>
+                            <span class="registration-form__radio-custom"></span>
+                            I'm a reader
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="registration-form__submit-btn">Registration</button>
+
+                <div class="registration-form__login-link">
+                    Have an account? <a href="/login">Entrance</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<script src="/javascripts/login.js"></script>
+</body>
+</html>

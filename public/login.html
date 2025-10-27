@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body class="page">
+<div class="container">
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__headline">BestLibrary</div>
+            <div class="header__sub-line">Entrance</div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="registration-form">
+            <form class="login-form" id="loginForm">
+                <div class="registration-form__group">
+                    <input class="registration-form__input" type="text" id="username" name="username" required placeholder="Username">
+                </div>
+
+                <div class="registration-form__group">
+                    <input class="registration-form__input" type="password" id="password" name="password" required placeholder="Password">
+                </div>
+
+                <div class="registration-form__group">
+                    <button type="submit" class="registration-form__submit-btn">Entrance</button>
+                </div>
+
+                <div class="registration-form__login-link">
+                    Don't have an account? <a href="/entrance">Login</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<script src="/javascripts/registration.js"></script>
+</body>
+</html>
