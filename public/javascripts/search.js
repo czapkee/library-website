@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.querySelector('.search__input');
 
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 try {
-                    const response = await fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(searchTerm)}`);
+                    const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
 
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         let message = `Found books: ${books.length}\n\n`;
                         books.forEach((book, index) => {
                             message += `${index + 1}. "${book.title}"\n`;
-                            message += `   Author: ${book.author || 'Unknown'}\n`;
+                            message += `   Author: ${book.author_name || 'Unknown'}\n`;
                             message += `   Year: ${book.publication_year || 'N/A'}\n`;
                             message += `   Language: ${book.language || 'Unknown'}\n`;
                             message += `   Category: ${book.category_name || 'Uncategorized'}\n\n`;

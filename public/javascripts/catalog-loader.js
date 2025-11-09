@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
 
-    let currentView = 'all'; // all, new, popular
+    let currentView = 'all';
     let currentCategory = 'all';
     let currentSort = 'newest';
     let currentSearch = '';

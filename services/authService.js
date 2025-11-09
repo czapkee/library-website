@@ -22,7 +22,10 @@ const authService = {
             username,
             email,
             password_hash: hashedPassword,
-            role: role || 'reader'
+            role: role || 'reader',
+            display_name: username,
+            bio: '',
+            avatar_url: ''
         });
 
         const { password_hash, ...userWithoutPassword } = user;

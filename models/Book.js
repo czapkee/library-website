@@ -20,7 +20,7 @@ class Book {
                 b.*,
                 u.username as author_name,
                 c.name as category_name,
-                -- Добавляем релевантность для поиска
+
                 CASE
                     WHEN b.title ILIKE $1 THEN 3
                     WHEN b.description ILIKE $1 THEN 2
