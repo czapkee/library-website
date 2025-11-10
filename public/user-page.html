@@ -210,7 +210,6 @@
                 margin-bottom: 15px;
             }
         }
-        /* Добавляем стили для вкладок */
         .tabs {
             display: flex;
             margin-bottom: 20px;
@@ -338,6 +337,33 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(90, 62, 62, 0.2);
         }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-reserved {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status-borrowed {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-available {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
     </style>
 </head>
 <body>
@@ -349,7 +375,7 @@
             <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
             <label for="burger-checkbox" class="burger"></label>
             <ul class="menu-list">
-                <li><a href="/login" class="menu-item">Registration</a></li>
+                <li><a href="/" class="menu-item">Main page</a></li>
                 <li><a href="/catalog" class="menu-item">Catalog</a></li>
                 <li><a href="/user-page" class="menu-item">Profile</a></li>
             </ul>
@@ -372,13 +398,13 @@
 
     <div class="books-section">
         <div class="tabs">
-            <button class="tab active" data-tab="favorites">Favorite Books</button>
+            <button class="tab active" data-tab="reserved">Reserved Books</button>
             <button class="tab" data-tab="my-books" id="my-books-tab" style="display: none;">My Books</button>
         </div>
 
-        <div id="favorites-content" class="tab-content active">
-            <h2 class="section-title">Favorite Books</h2>
-            <ul id="favorites-list" class="books-list"></ul>
+        <div id="reserved-content" class="tab-content active">
+            <h2 class="section-title">Reserved Books</h2>
+            <ul id="reserved-list" class="books-list"></ul>
         </div>
 
         <div id="my-books-content" class="tab-content">
@@ -474,7 +500,6 @@
 <script>
     console.log('Script started');
 
-
     async function getCurrentUser() {
         try {
             const response = await fetch('/auth/me');
@@ -486,7 +511,6 @@
             return null;
         }
     }
-
 
     async function loadProfileData() {
         console.log('Loading profile data...');
@@ -514,7 +538,6 @@
         }
     }
 
-
     function displayProfileData(data) {
         console.log('Displaying profile data:', data);
         if (!data || !data.user) {
@@ -522,8 +545,7 @@
             return;
         }
 
-        const { user, favorites = [], userBooks = [] } = data;
-
+        const { user, reservedBooks = [], userBooks = [] } = data;
 
         const usernameElement = document.getElementById('username');
         const roleElement = document.getElementById('role');
@@ -547,9 +569,39 @@
             if (addBookBtn) addBookBtn.style.display = 'none';
         }
 
-        displayBooksList(favorites, 'favorites-list', 'reader');
+        displayReservedBooksList(reservedBooks, 'reserved-list');
     }
 
+    function displayReservedBooksList(books, listId) {
+        const listElement = document.getElementById(listId);
+        if (!listElement) {
+            console.error('List element not found:', listId);
+            return;
+        }
+
+        if (!books || books.length === 0) {
+            listElement.innerHTML = '<li class="book-item">No reserved books found</li>';
+            return;
+        }
+
+        listElement.innerHTML = books.map(book => `
+            <li class="book-item">
+                <img src="${book.cover_image_url || 'https://via.placeholder.com/60x80?text=No+Cover'}"
+                     alt="${book.title}" class="book-cover">
+                <div class="book-info">
+                    <div class="book-title">${book.title}</div>
+                    <div class="book-author">by ${book.author_name || 'Unknown'}</div>
+                    <div class="book-status">
+                        <span class="status-badge status-reserved">Reserved</span>
+                    </div>
+                    ${book.description ? `<div class="book-description">${book.description.substring(0, 100)}...</div>` : ''}
+                </div>
+                <div class="book-actions">
+                    <button class="btn btn-remove" onclick="cancelReservation(${book.id})">Cancel Reservation</button>
+                </div>
+            </li>
+        `).join('');
+    }
 
     function displayBooksList(books, listId, userType) {
         const listElement = document.getElementById(listId);
@@ -573,16 +625,15 @@
                     ${book.description ? `<div class="book-description">${book.description.substring(0, 100)}...</div>` : ''}
                 </div>
                 <div class="book-actions">
-                    ${userType === 'reader' ?
-            `<button class="btn btn-remove" onclick="removeFromFavorites(${book.id})">Remove</button>` :
+                    ${userType === 'author' ?
             `<button class="btn btn-edit" onclick="editBook(${book.id})">Edit</button>
-                         <button class="btn btn-remove" onclick="deleteBook(${book.id})">Delete</button>`
+                         <button class="btn btn-remove" onclick="deleteBook(${book.id})">Delete</button>` :
+            ''
         }
                 </div>
             </li>
         `).join('');
     }
-
 
     async function loadCategories() {
         try {
@@ -608,25 +659,25 @@
         }
     }
 
-    async function removeFromFavorites(bookId) {
-        if (!confirm('Remove from favorites?')) return;
+    async function cancelReservation(bookId) {
+        if (!confirm('Are you sure you want to cancel this reservation?')) return;
 
         try {
-            const response = await fetch(`/api/user/favorites/${bookId}`, {
-                method: 'DELETE'
+            const response = await fetch(`/api/books/${bookId}/cancel-reservation`, {
+                method: 'POST'
             });
 
             const result = await response.json();
 
             if (result.success) {
-                alert('Book removed from favorites');
+                alert('Reservation cancelled successfully');
                 loadProfileData();
             } else {
                 alert('Error: ' + result.error);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error removing from favorites');
+            alert('Error cancelling reservation');
         }
     }
 
@@ -642,7 +693,7 @@
 
             if (result.success) {
                 alert('Book deleted successfully');
-                loadProfileData(); // Перезагружаем данные
+                loadProfileData();
             } else {
                 alert('Error: ' + result.error);
             }
@@ -728,13 +779,11 @@
         });
     }
 
-
     function setupTabs() {
         const tabs = document.querySelectorAll('.tab');
 
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
-
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
@@ -811,7 +860,6 @@
             }
         });
     }
-
 
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM loaded');
