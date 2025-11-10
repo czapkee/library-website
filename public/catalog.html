@@ -22,9 +22,9 @@
                 <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
                 <label for="burger-checkbox" class="burger"></label>
                 <ul class="menu-list">
-                    <li><a href="/login" class="menu-item">Become an author!</a></li>
+                    <li><a href="/user-page" class="menu-item">Profile</a></li>
                     <li><a href="/catalog" class="menu-item">Catalog</a></li>
-                    <li><a href="/" class="menu-item">main page</a></li>
+                    <li><a href="/" class="menu-item">Main page</a></li>
                 </ul>
             </div>
         </div>
@@ -32,18 +32,16 @@
 
     <main>
 
-        <!-- Filters Section -->
-<!-- В catalog.html обновляем секцию фильтров -->
+
 <section class="filters-section">
     <div class="filters-container">
         <select class="filter-select" id="categoryFilter">
             <option value="all">All Categories</option>
-            <!-- Categories loaded dynamically -->
+
         </select>
 
         <select class="filter-select" id="sortFilter">
-<!--            <option value="newest">Newest First</option>-->
-<!--            <option value="oldest">Oldest First</option>-->
+
             <option value="title">Title A-Z</option>
             <option value="title_desc">Title Z-A</option>
             <option value="year">Year: New to Old</option>
